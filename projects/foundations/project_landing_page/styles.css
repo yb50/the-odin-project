@@ -40,6 +40,35 @@ body {
   display: flex;
 }
 
+.hero-section>.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+
+.left-side {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  text-align: left;
+  gap: 16px;
+}
+
+.left-side button {
+  align-self: flex-start;
+}
+
+.hero-section img {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+  height: 175px;
+  background-color: gray;
+}
+
 .image-section > .container,
 .quote-section > .container {
   display: flex;
@@ -60,7 +89,7 @@ body {
   display: flex;
   max-width: 1000px;
   margin: 0 auto;
-  padding: 4px;
+  padding: 8px;
   align-items: center;
 }
 
@@ -68,6 +97,11 @@ ul {
   display: flex;
   list-style: none;
   gap: 16px;
+}
+
+.header-logo {
+  font-size: 24px;
+  color: #F9FAF8;
 }
 
 .hero-section,
@@ -93,6 +127,11 @@ li {
   color: #E5E7EB;
 }
 
+.images img {
+  border: 2px solid #3882F6 ;
+  border-radius: 5px;
+}
+
 .quote-section {
   background-color: #E5E7EB;
   font-size: 36px;
@@ -102,7 +141,10 @@ li {
 }
 
 cite {
-  align-items: end;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: bold;
+  align-self: flex-end;
 }
 
 .cta-box {
