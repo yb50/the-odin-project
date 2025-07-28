@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rock, paper, scissors game</title>
+</head>
+<body>
+  
+  <script>
+    let humanScore = 0;
+    let computerScore = 0;
+
+    function getComputerChoice() {
+      let RandomChoiceGenerator = Math.floor(Math.random() * 3);
+
+      if (RandomChoiceGenerator === 0) {
+        return "rock";
+      } else if (RandomChoiceGenerator === 1) {
+        return "paper";
+      } else {
+        return "scissors";
+      }
+    }
+
+    // console.log(getComputerChoice());
+
+    function getHumanChoice() {
+      let userInput = prompt("Enter your choice: rock, paper or scissors.");
+      return userInput.toLowerCase();
+    }
+    
+    // console.log(getHumanChoice());
+
+    function playGame() {
+      function playRound(humanChoice, computerChoice) {
+        humanChoice = humanChoice.toLowerCase();
+
+        if (humanChoice === computerChoice) {
+          console.log("It's a tie!");
+        } else if (
+          (humanChoice === "rock" && computerChoice === "scissors") ||
+          (humanChoice === "paper" && computerChoice === "rock") ||
+          (humanChoice === "scissors" && computerChoice === "paper")
+        ) {
+          console.log(`You win! ${humanChoice} beats ${computerChoice}`);
+          humanScore++;
+        } else {
+          console.log(`You lose! ${computerChoice} beats ${humanChoice}`);
+          computerScore++;
+        }
+
+        console.log(`Score -> Human: ${humanScore}, Computer: ${computerScore}`);
+      }
+
+      for (let i = 0; i < 5; i++) {
+        const humanSelection = getHumanChoice();
+        const computerSelection = getComputerChoice();
+        playRound(humanSelection, computerSelection);
+      }
+
+      console.log("Final Result:");
+      if (humanScore > computerScore) {
+        console.log("You win the game!");
+      } else if (computerScore > humanScore) {
+        console.log("You lose the game!");
+      } else {
+        console.log("The game is a tie!");
+      }
+    }
+
+    playGame();
+  </script>
+</body>
+</html>
