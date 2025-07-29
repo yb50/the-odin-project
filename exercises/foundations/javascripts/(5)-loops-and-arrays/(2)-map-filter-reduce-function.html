@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <script>
+    /*
+    function sumOfTripleEvens() {
+      const arr = [1, 2, 3, 4, 5];
+
+      // .filter()
+      const arrFiltered = arr.filter((num) => num % 2 === 0);
+      console.log(".filter()");
+      console.log(arr);
+      console.log(arrFiltered);
+
+      // .map()
+      const arrMapped = arrFiltered.map((num) => num * 3);
+      console.log(".map()");
+      console.log(arr);
+      console.log(arrFiltered);
+      console.log(arrMapped);
+
+      // .reduce()
+      const arrReduced = arrMapped.reduce((total, num) => {
+        return total + num;
+      }, 0);
+      console.log(".reduce()");
+      console.log(arr);
+      console.log(arrFiltered);
+      console.log(arrMapped);
+      console.log(arrReduced);
+    }
+    sumOfTripleEvens();
+    */
+
+    function sumOfTripleEvens(array) {
+      return array
+        .filter(num => num % 2 === 0)
+        .map(num => num * 3)
+        .reduce((total, num) => total + num);
+    }
+    console.log(sumOfTripleEvens([1, 2, 3, 4, 5]));
+  </script>
+</body>
+</html>

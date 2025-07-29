@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <script>
+    /*
+    function sumOfTripleEvens(array) {
+      let sum = 0;
+      
+      for (let i = 0; i < array.length; i++) {
+        if (array[i] % 2 === 0) {
+          const tripleEvenNumber = array[i] * 3;
+          sum += tripleEvenNumber;
+        }
+      }
+      return sum;
+    }
+
+    console.log(sumOfTripleEvens());
+    */
+
+    // .map()
+
+    /*
+    function addOne(num) {
+      return num + 1;
+    }
+
+    const arr = [1, 2, 3, 4, 5];
+    const mappedArr = arr.map(addOne);
+    console.log(mappedArr);
+    console.log(arr); // Original didn't change
+    */
+
+      // The above can be shortened using the arrow function
+      
+      /*
+      const arr = [1, 2, 3, 4, 5];
+      const mappedArr = arr.map((num) => num + 1);
+      console.log(mappedArr);
+      */
+
+    // .filter()
+    
+    /*
+    function isOdd(num) {
+      return num % 2 !== 0;
+    }
+
+    const arr = [1, 2, 3, 4, 5];
+    const oddNums = arr.filter(isOdd);
+    console.log(oddNums);
+    console.log(arr);
+    */
+    
+      // The above can be shortened using the arrow function
+      /*
+      const arr = [1, 2, 3, 4, 5];
+      const oddNums = arr.filter((num) => num % 2 !== 0);
+      console.log(oddNums);
+      console.log(arr);
+      */
+    
+    // .reduce()
+
+    const arr = [1, 2, 3, 4, 5];
+    const productOfAllNums = arr.reduce((total, currentItem) => {
+      return total * currentItem;
+    }, 1);
+    console.log(productOfAllNums);
+    console.log(arr);
+  </script>
+</body>
+</html>
