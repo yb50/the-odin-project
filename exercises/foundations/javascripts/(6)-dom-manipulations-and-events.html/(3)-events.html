@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button id="btn">CLICK ME BABY</button>
+  
+  <div id="container">
+    <button id="one">Click Me</button>
+    <button id="two">Click Me</button>
+    <button id="three">Click Me</button>
+  </div>
+
+  <script>
+
+    btn.addEventListener("click", function (e) {
+      console.log(e.target);
+    });
+
+    btn.addEventListener("click", function (e) {
+      e.target.style.background = "blue";
+    });
+
+    // buttons is a node list
+    const buttons = document.querySelectorAll("button");
+
+    // .forEach method goes through each button
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        alert(button.id);
+      });
+    });
+
+  </script>
+</body>
+</html>
