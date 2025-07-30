@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rock, Paper, Scissors Game</title>
+</head>
+
+<body>
+  <button id="rock">Rock</button>
+  <button id="paper">Paper</button>
+  <button id="scissors">Scissors</button>
+
+  <script>
+    document.querySelectorAll("button").forEach(button => {
+      button.addEventListener("click", () => {
+        const playerChoice = button.id;
+        const computerChoice = getComputerChoice();
+        playRound(playerChoice, computerChoice);
+      });
+    });
+
+    let humanScore = 0;
+    let computerScore = 0;
+
+    const resultsDiv = document.createElement("div");
+    const roundResult = document.createElement("p");
+    const scoreDisplay = document.createElement("p");
+    scoreDisplay.textContent = "Score - You: 0 | Computer: 0";
+    const winnerDisplay = document.createElement("p");
+
+    document.body.appendChild(resultsDiv);
+    resultsDiv.appendChild(roundResult);
+    resultsDiv.appendChild(scoreDisplay);
+    resultsDiv.appendChild(winnerDisplay);
+
+    function getComputerChoice() {
+      const choices = ["rock", "paper", "scissors"];
+      return choices[Math.floor(Math.random() * 3)];
+    }
+
+    function playRound(playerSelection, computerSelection) {
+      if (humanScore >= 5 || computerScore >= 5) 
+        return;
+
+      if (playerSelection === computerSelection) {
+        roundResult.textContent = `It's a tie! You both chose ${playerSelection}.`;
+      } else if (
+        (playerSelection === "rock" && computerSelection === "scissors") ||
+        (playerSelection === "paper" && computerSelection === "rock") ||
+        (playerSelection === "scissors" && computerSelection === "paper")
+      ) {
+        humanScore++;
+        roundResult.textContent = `You win this round! ${playerSelection} beats ${computerSelection}.`;
+      } else {
+        computerScore++;
+        roundResult.textContent = `You lose this round! ${computerSelection} beats ${playerSelection}.`;
+      }
+
+      scoreDisplay.textContent = `Score - You: ${humanScore} | Computer: ${computerScore}`;
+
+      if (humanScore === 5 || computerScore === 5) {
+        winnerDisplay.textContent = humanScore === 5 ? "You won the game!" : "You lost the game.";
+      }
+    }
+  </script>
+</body>
+
+</html>
