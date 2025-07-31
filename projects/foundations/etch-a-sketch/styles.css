@@ -1,0 +1,43 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100vmin;
+  margin: 0 auto;
+  aspect-ratio: 1 / 1;
+}
+
+.square {
+  width: calc(100% / 16);
+  aspect-ratio: 1 / 1;
+  border: 1px solid lightgray;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 20px auto;
+  background-color: #3498db;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #2980b9;
+  transition: all 0.1s ease;
+  display: block;
+}
+
+button:hover {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #2980b9;
+}
+
+button:active {
+  transform: translateY(4px);
+  box-shadow: 0 0px 0 #2980b9;
+}

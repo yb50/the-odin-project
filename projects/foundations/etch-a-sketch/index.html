@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Etch-a-sketch</title>
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  
+  <button>New Grid</button>
+  <div class="container"></div>
+
+  <script>
+    const container = document.querySelector(".container");
+
+    function createGrid(size) {
+      container.innerHTML = "";
+      for (let i = 0; i < size * size; i++) {
+        const squareDivs = document.createElement("div");
+        squareDivs.classList.add("square");
+        squareDivs.style.width = `calc(100% / ${size})`; 
+        squareDivs.addEventListener("mouseenter", () => {
+          squareDivs.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+        });
+        container.appendChild(squareDivs);
+      }
+    }
+
+    createGrid(16);
+
+    const btn = document.querySelector("button");
+    btn.addEventListener("click", () => {
+      let input = prompt("Enter a number of squares per side (max 100):");
+      let size = parseInt(input);
+
+      if (isNaN(size) || size < 1 || size > 100) {
+        alert("Please enter a valid number between 1 and 100.");
+        return;
+      }
+
+      createGrid(size);
+    });
+  </script>
+</body>
+</html>
