@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <!-- Online font method #1 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+  <style>
+    /* Online font method #2 */
+    @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+    /* A popular system font stack for fallback */
+    body {
+      font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    }
+
+    /* Self hosted fonts. PS: Wise to include a fallback */
+    @font-face {
+      font-family: my-own-font;
+      src: url(.../fonts/the-font-file.woff);
+    }
+
+    h1 {
+      font-family: my-own-font, sans-serif;
+    }
+
+    h2 {
+      letter-spacing: -0.1em;
+    }
+
+    .test {
+      line-height: 1.5;
+      text-transform: capitalize;
+
+      width: 200px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding: 20px;
+      font-size: 1.3rem;
+      margin: 0;
+      background: white;
+      resize: horizontal;
+    }
+  </style>
+</head>
+<body>
+  <h2>Letter-spacing</h2>
+
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione eius quibusdam ut, maiores quasi, iure architecto, necessitatibus sed culpa maxime distinctio ipsa nam repellat nostrum laboriosam tempora. Mollitia, pariatur velit!</p>
+  <p class="test">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Reiciendis sequi est modi, temporibus eaque fugiat molestias obcaecati distinctio cupiditate. Beatae itaque eum eos deserunt illo consequatur quisquam similique dolorum adipisci.</p>
+</body>
+</html>
