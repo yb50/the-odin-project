@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    /* > selects direct children */
+    /* main div {} targets the child AND grand-child groups */
+    /* main > div {} targets the child groups */ 
+    /* main > div > div {} targets the grand-child groups */
+
+    /* + selects the adjacent sibling*/
+    /* .group1 + div {} targets child group 2 */
+    /* .group1 + div + div {} targets child group 3 */
+
+    /* ~ selects ALL siblings, not only the first one */
+    /* .group ~ div {} targets the second and third child groups */
+  </style>
+</head>
+<body>
+  <main class="parent">
+    <div class="child group1">
+      <div class="grand-child group1"></div>
+    </div>
+    <div class="child group2">
+      <div class="grand-child group2"></div>
+    </div>
+    <div class="child group3">
+      <div class="grand-child group3"></div>
+    </div>
+  </main>
+</body>
+</html>
