@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    /* Custom properties*/
+    .error-modal {
+      --color-error-text: red;
+      --modal-border: 1px solid black;
+      --modal-font-size: calc(2rem + 5vw);
+
+      color: var(--color-error-text);
+      border: var(--modal-border);
+      font-size: var(--modal-font-size);
+    }
+
+    /* Fallback values */
+    .fallback {
+      --color-text: white;
+
+      background-color: var(--undeclared-property, black);
+      color: var(--undeclared-again, var(--color-text, yellow));
+    }
+
+    /* Scope */
+    .cool-div {
+      --main-bg: red;
+    }
+
+    .cool-paragraph {
+      background-color: var(--main-bg);
+    }
+
+    .boring-paragraph {
+      background-color: var(--main-bg);
+    }
+
+    /* :root selector */
+    :root {
+      --main-color: green;
+    }
+
+    .test-paragraph {
+      color: var(--main-color);
+    }
+
+    .anotherTest-paragraph {
+      background-color: var(--main-color);
+    }
+    /*  */
+    /*  */
+  </style>
+</head>
+<body>
+  <div class="cool-div">
+    <p class="cool-paragraph">Check out my cool, red background!</p>
+  </div>
+  
+  <p class="boring-paragraph">I'm not in scope so I'm not cool.</p>
+
+  <p class="test-paragraph">Lorem ipsum dolor sit amet.</p>
+  
+  <p class="anotherTest-paragraph">Lorem ipsum dolor sit amet.</p>
+</body>
+</html>
