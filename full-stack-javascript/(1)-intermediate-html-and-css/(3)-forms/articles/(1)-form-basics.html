@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <form action="example.com/path" method="post">
+    <label for="first_name">First Name:</label>
+    <input type="text" id="first_name" placeholder="Bob..." name="first_name">
+  </form>
+
+  <!-- Last name is not returned if 'name="last_name"' is deleted -->
+  <form action="https://httpbin.org/post" method="post">
+    <div>
+      <label for="first_name">First Name:</label>
+      <input type="text" name="first_name" id="first_name">
+    </div>
+  
+    <div>
+      <label for="last_name">Last Name:</label>
+      <input type="text" name="last_name" id="last_name">
+    </div>
+  
+    <div>
+      <label for="age">Age:</label>
+      <input type="number" name="age" id="age">
+    </div>
+  
+    <button type="submit">Submit</button>
+  </form>
+
+  <!-- Email -->
+  <form>
+    <label for="user_email">Email Address</label>
+    <input type="email" id="user_email" name="email" placeholder="you@example.com">
+  </form>
+
+  <!-- Password -->
+  <form>
+    <label for="user_password">Password</label>
+    <input type="password" id="user_password" name="password">
+  </form>
+
+  <!-- Number -->
+  <form>
+    <label for="amount">Amount</label>
+    <input type="number" id="amount" name="amount">
+  </form>
+
+  <!-- Date -->
+  <form>
+    <label for="dob">Date of Birth</label>
+    <input type="date" id="dob" name="dob">
+  </form>
+
+  <!-- Text area -->
+  <textarea row="20" cols="60">Just some text</textarea>
+
+  <!-- Section elements -->
+  <!-- The value is sent to the server when the form is submitted -->
+  <select name="Car">
+    <option value="mercedes">Mercedes</option>
+    <option value="tesla">Tesla</option>
+    <option value="volvo" selected>Volvo</option> <!-- default option -->
+    <option value="bmw">BMW</option>
+    <option value="mini">Mini</option>
+    <option value="ford">Ford</option>
+  </select>
+
+  <!-- Section elements #2 -->
+  <select name="fashion">
+    <optgroup label="Clothing">
+      <option value="t_shirt">T-Shirts</option>
+      <option value="sweater">Sweaters</option>
+      <option value="coats">Coats</option>
+    </optgroup>
+    <optgroup label="Foot Wear">
+      <option value="sneakers">Sneakers</option>
+      <option value="boots">Boots</option>
+      <option value="sandals">Sandals</option>
+    </optgroup>
+  </select>
+
+  <!-- Radio buttons -->
+   <!-- 'name' turns the same elements into the same group of options -->
+  <h1>Ticket Type</h1>
+
+  <div>
+    <label for="child">Child</label>
+    <input type="radio" id="child" name="ticket_type" value="child">
+  </div>
+
+  <div>
+    <label for="adult">Adult</label>
+    <input type="radio" id="adult" name="ticket_type" value="adult" checked>
+  </div>
+
+  <div>
+    <label for="senior">Senior</label>
+    <input type="radio" id="senior" name="ticket_type" value="senior">
+  </div>
+
+  <!-- Checkboxes -->
+  <h1>Pizza Toppings</h1>
+  
+  <div>
+    <label for="sausage">Sausage</label>
+    <input type="checkbox" id="sausage" name="topping" value="sausage">
+  </div>
+  
+  <div>
+    <label for="onions">Onions</label>
+    <input type="checkbox" id="onions" name="topping" value="onions">
+  </div>
+  
+  <div>
+    <label for="pepperoni">Pepperoni</label>
+    <input type="checkbox" id="pepperoni" name="topping" value="pepperoni">
+  </div>
+  
+  <div>
+    <label for="mushrooms">Mushrooms</label>
+    <input type="checkbox" id="mushrooms" name="topping" value="mushrooms">
+  </div>
+
+  <!-- Single checkbox -->
+  <div>
+    <label for="newsletter">Send me the newsletter!</label>
+    <input type="checkbox" id="newsletter" name="newsletter" checked>
+  </div>
+
+  <!-- Buttons -->
+  <button>Click me!</button>
+  <button type="submit">Submit</button>
+  <button type="reset">Reset</button>
+  <button type="button">Click to Toggle</button>
+
+  <!-- Using form controls outside of forms -->
+  <div>
+    <label for="username">What's your name?</label>
+    <input type="text" id="username">
+    <button class="greet-btn">Greet Me</button>
+  </div>
+
+  <!-- Fieldset element-->
+  <fieldset>
+    <label for="first_name">First Name</label>
+    <input type="text" id="first_name" name="first_name">
+
+    <label for="last_name">Last Name</label>
+    <input type="text" id="last_name" name="last_name">
+  </fieldset>
+
+  <!-- Legend -->
+  <!-- Gives Fieldsets a heading/caption with info about the Fieldset -->
+  <fieldset>
+    <legend>Contact Details</legend>
+  
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name">
+  
+    <label for="phone_number">Phone Number:</label>
+    <input type="tel" id="phone_number" name="phone_number">
+  
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email">
+  </fieldset>
+  
+  <fieldset>
+    <legend>Delivery Details</legend>
+  
+    <label for="street_address">Street Address:</label>
+    <input type="text" id="street_address" name="street_address">
+  
+    <label for="city">City:</label>
+    <input type="text" id="city" name="city">
+  
+    <label for="zip_code">Zip Code:</label>
+    <input type="text" id="zip_code" name="zip_code">
+  </fieldset>
+
+  <!-- Common use case for Legend is with Radio buttons -->
+  <fieldset>
+    <legend>What would you like to drink?</legend>
+  
+    <div>
+      <input type="radio" name="drink" id="coffee" value="coffee">
+      <label for="coffee">Coffee</label>
+    </div>
+  
+    <div>
+      <input type="radio" name="drink" id="tea" value="tea">
+      <label for="tea">Tea</label>
+    </div>
+  
+    <div>
+      <input type="radio" name="drink" id="soda" value="soda">
+      <label for="soda">Soda</label>
+    </div>
+  </fieldset>
+
+  <!-- Belongs to the JavaScript below -->
+  <h1 class="greeting"></h1>
+
+  <script>
+    const name = document.querySelector("#username")
+    const greetMeButton = document.querySelector(".greet-btn")
+    const greetingOutput = document.querySelector(".greeting")
+
+    greetMeButton.addEventListener('click', (event) => {
+      greetingOutput.innerText = `Hello ${name.value}`;
+    })
+  </script>
+</body>
+</html>
