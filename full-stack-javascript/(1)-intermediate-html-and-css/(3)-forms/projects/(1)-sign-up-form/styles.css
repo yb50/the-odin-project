@@ -1,0 +1,29 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  height: 100vh;
+}
+
+.left-side {
+  flex: 0 0 35%;
+  background-image: url("images/halie-west-25xggax4bSA-unsplash.jpg");
+}
+
+.odin-logo {
+  background-image: url("images/odin-lined.png");
+}
+
+.logo-text {
+  @font-face {
+      font-family: Norse-Bold;
+      src: url(fonts/Norse-Bold.otf);
+    }
+}
+
+.right-side {
+  flex: 0 0 65%;
+}
