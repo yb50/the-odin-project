@@ -8,22 +8,53 @@ body {
   height: 100vh;
 }
 
+@font-face {
+  font-family: "Norse-Bold";
+  src: url("fonts/Norse-Bold.otf");
+}
+
+/* LEFT SIDE */
 .left-side {
   flex: 0 0 35%;
+  display: flex;
+  flex-direction: column;
+  padding-top: 10%;
+  color: white;
+
   background-image: url("images/halie-west-25xggax4bSA-unsplash.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.logo-container {
+  display: flex;
+  padding: 20px;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(0, 0, 0, 40%);
 }
 
 .odin-logo {
   background-image: url("images/odin-lined.png");
+  background-size:cover;
+  width: 6rem;
+  height: 8rem;
 }
 
 .logo-text {
-  @font-face {
-      font-family: Norse-Bold;
-      src: url(fonts/Norse-Bold.otf);
-    }
+  font-family: "Norse-Bold", system-ui, sans-serif;
+  font-size: 5rem;
+
 }
 
+.photo-credit {
+  margin-top: auto;
+  margin-bottom: 10px;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+/* RIGHT SIDE */
 .right-side {
   flex: 0 0 65%;
 }
