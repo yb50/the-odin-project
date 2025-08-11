@@ -7,6 +7,7 @@
 body {
   display: flex;
   height: 100vh;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
 @font-face {
@@ -59,7 +60,6 @@ body {
   flex: 0 0 65%;
   display: flex;
   flex-direction: column;
-  height: 100vh;
 }
 
 .hero-section,
@@ -72,13 +72,37 @@ body {
 .hero-section {
   flex: 0 0 35%;
   background-color: rgba(211, 211, 211, 0.133);
+  font-weight: bold;
+  font-size: 24px;
 }
 
-
+.hero-section > p {
+  margin-top: 60px;
+}
 
 .form-section {
   flex: 0 0 30%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: 0;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.forms {
+  display: flex;
+  gap: 80px;
+}
+
+.form-item {
+  margin-bottom: 20px;
+}
+
+.forms input {
+  width: 120%;
+  height: 1.5rem;
+  padding: 0 8px;
+  font-size: 1rem;
 }
 
 .login-section {
@@ -86,6 +110,21 @@ body {
   display: flex;
   flex-direction: column;
   background-color: rgba(211, 211, 211, 0.133);
+}
+
+input {
+  border: 1px solid #E5E7EB;
+  border-radius: 2px;
+  background-color: rgba(211, 211, 211, 0.05);
+}
+
+input:focus {
+  border-color: blue;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+input:invalid {
+  border-color: red;
 }
 
 button {
