@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="book-container"></div>
+
+  <button class="add-book-btn">Add book</button>
+  <dialog class="add-book-dialog">
+    <button class="close-btn">Close</button>
+
+    <div>
+      <label>
+        Title: 
+        <input type="text" id="title">
+      </label>
+    </div>
+    
+    <div>
+      <label>
+        Author: 
+        <input type="text" id="author">
+      </label>
+    </div>
+
+    <div>
+      <label>
+        Pages: 
+        <input type="text" id="pages">
+      </label>
+    </div>
+
+    <div>
+      <span>Read?</span>
+      <label>
+        <input type="radio" name="read" value="yes">
+        Yes
+      </label>
+      <label>
+        <input type="radio" name="read" value="no">
+        No
+      </label>
+    </div>
+
+    <button>Submit</button>
+  </dialog>
+
+  <script>
+    const myLibrary = [];
+
+    function Book(title, author, pages, read) {
+      this.title = title;
+      this.author = author;
+      this.pages = pages;
+      this.read = read;
+      this.id = crypto.randomUUID();
+
+    }
+    
+    Book.prototype.info = function() {
+      let readStatus = this.read ? "read already" : "not read yet";
+      return `${this.title} by ${this.author}, ${this.pages} pages, ${readStatus}`;
+    }
+
+    function addBookToLibrary(title, author, pages, read) {
+      const newBook = new Book(title, author, pages, read);
+      myLibrary.push(newBook);
+      return newBook;
+    }
+
+    // Manually added books for testing
+    const hobbit = addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 295, false);
+    const halo = addBookToLibrary("Halo", "No Idea", 251, true);
+
+    function displayBooks() {
+      const container = document.getElementById("book-container");
+      container.innerHTML = "";
+
+      for (const book of myLibrary) {
+        const card = document.createElement("div");
+        card.className = "book-card";
+
+        const title = document.createElement("div");
+        title.textContent = `Title: ${book.title}`;
+
+        const author = document.createElement("div");
+        author.textContent = `Author: ${book.author}`;
+
+        const pages = document.createElement("div");
+        pages.textContent = `Pages: ${book.pages}`;
+
+        const readStatus = document.createElement("div");
+        readStatus.textContent = book.read ? "Read already" : "Not read yet";
+
+        card.append(title, author, pages, readStatus);
+        container.appendChild(card);
+      }
+    }
+
+    displayBooks();
+
+    const dialog = document.querySelector(".add-book-dialog");
+    document.querySelector(".add-book-btn").onclick = () => dialog.showModal();
+    document.querySelector(".close-btn").onclick = () => dialog.close();
+  </script>
+</body>
+</html>
