@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tic-Tac-Toe</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <main class="app">
+    <section class="panel">
+      <h1>Tic-Tac-Toe</h1>
+
+      <form id="setupForm">
+        <div class="field">
+          <label for="p1">Player X</label>
+          <input id="p1" name="p1" type="text" placeholder="Alice" />
+        </div>
+        <div class="field">
+          <label for="p2">Player Y</label>
+          <input id="p2" name="p2" type="text" placeholder="Bob" />
+        </div>
+        <div class="buttons">
+          <button type="submit" id="startBtn">Start / Restart</button>
+          <button type="button" id="resetBtn" class="resetBtn">Clear Board</button>
+        </div>
+      </form>
+
+      <div id="status">Ready.</div>
+    </section>
+
+    <section id="board">
+      <button class="cell" data-index="0"></button>
+      <button class="cell" data-index="1"></button>
+      <button class="cell" data-index="2"></button>
+      <button class="cell" data-index="3"></button>
+      <button class="cell" data-index="4"></button>
+      <button class="cell" data-index="5"></button>
+      <button class="cell" data-index="6"></button>
+      <button class="cell" data-index="7"></button>
+      <button class="cell" data-index="8"></button>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
