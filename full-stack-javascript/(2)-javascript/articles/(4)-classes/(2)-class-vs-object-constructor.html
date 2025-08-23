@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <script>
+    // ----- Object Constructor -----
+    function Person(name) {
+      this.name = name;
+    }
+    Person.prototype.sayHi = function() {
+      console.log("Hi " + this.name);
+    };
+    const p1 = new Person("Alice");
+
+    // ----- Class -----
+    class Person2 {
+      constructor(name) {
+        this.name = name;
+      }
+      sayHi() { console.log("Hi " + this.name); };
+    }
+    const p2 = new Person2("Bob");
+  </script>
+</body>
+</html>
