@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <!-- Why is two.js our entry point? Well, in our above examples, two.js imports variables from one.js, meaning two.js depends on one.js, so we have the following dependency graph:
+
+    importer  depends on  exporter
+    two.js <-------------- one.js 
+  -->
+  <script src="two.js" type="module"></script>
+</body>
+</html>

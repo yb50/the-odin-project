@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <script>
+    // ----- 1. Named -----
+    
+      // ----- Export -----
+      // one.js
+      export const greeting = "Hello, Odinite!";
+      export const farewell = "Bye bye, Odinite!";
+
+      // OR:
+      const greeting2 = "Hello, Odinite!";
+      const farewell2 = "Bye bye, Odinite!";
+      export { greeting, farewell };
+
+      // ----- Import -----
+      // two.js
+      import { greeting, farewell } from "./one.js";
+
+      console.log(greeting); // "Hellow, Odinite!"
+      console.log(farewell); // "Bye bye, Odinite!"
+    
+    // ----- 2. Default -----
+    
+      // ----- Export -----
+      // one.js
+      export default "Hello, Odinite!";
+
+      // OR:
+      /*
+      const greeting = "Hello, Odinite!";
+      export default greeting;
+      */
+
+      // ----- Import -----
+      // two.js
+      import helloOdinite from "./one.js"; // Name is up to you.
+
+      console.log(helloOdinite);
+
+    // ----- Mixed Export and Import Example -----
+    // one.js
+    /*
+    export default "Hello, Odinite!";
+    export const farewell = "Bye bye, Odinite!";
+
+    import greeting, { farewell } from "./one.js"
+    */
+  </script>
+</body>
+</html>
