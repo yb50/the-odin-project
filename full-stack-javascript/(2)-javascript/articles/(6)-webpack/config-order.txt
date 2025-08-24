@@ -1,0 +1,77 @@
+// ----- 1 -----
+
+mkdir webpack-practice &&
+cd webpack-practice &&
+npm init -y
+
+// ----- 2 -----
+
+npm install --save-dev webpack webpack-cli
+
+// ----- 3 -----
+
+mkdir src && touch src/index.js src/greeting.js
+
+// ----- 4 -----
+
+  // index.js
+  import { greeting } from "./greeting.js";
+
+  console.log(greeting);
+
+  // greeting.js
+  export const greeting = "Hello, Odinite!";
+
+// ----- 5 -----
+
+  Back in your project root (so outside of src), create a webpack.config.js file that contains the following:
+
+  // webpack.config.js
+  const path = require("path");
+
+  module.exports = {
+    mode: "development",
+    entry: "./src/index.js",
+    output: {
+      filename: "main.js",
+      path: path.resolve(__dirname, "dist"),
+      clean: true,
+    },
+  };
+
+// ----- 6 -----
+
+run: 'npx webpack' in root folder. This creates a 'dist' folder.
+
+// ----- 7 -----
+
+run: 'node dist/main.js' in root folder. This returns 'Hello, Odinite!' in the terminal.
+
+// ----- 8 -----
+
+run: 'npm install --save-dev html-webpack-plugin' in root folder.
+
+// ----- 9 -----
+
+add the following to webpack.config.js:
+
+  plugins: [
+      new HtmlWebpackPlugin({
+        template: "./src/template.html",
+      }),
+    ],
+
+// ----- 10 -----
+
+run: 'npx webpack' in root folder.
+
+// ----- 11 -----
+
+run: 'npm install --save-dev style-loader css-loader' in root folder.
+
+// ----- 12 -----
+
+automatic refresh, instead of manual 'npx webpack'
+
+run: 'npm install --save-dev webpack-dev-server' in root folder.
+
