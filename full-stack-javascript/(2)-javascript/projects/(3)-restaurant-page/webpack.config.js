@@ -11,13 +11,12 @@ module.exports = {
   },
   devtool: "eval-source-map",
 
-  // ----- CHECK LATER FOR OWN PROJCETS -----
   devServer: {
-    hot: true, // enable HMR for JS/CSS
-    liveReload: true, // fall back to full reload if HMR isn’t handled
-    watchFiles: ["src/**/*"], // watch HTML, CSS, JS in src
-    open: true, // optional: auto-open browser
-    client: { overlay: true }, // optional: show build errors as an overlay
+    hot: true,
+    liveReload: true,
+    watchFiles: ["src/**/*"],
+    open: true, // Handy: auto-opens browser
+    client: { overlay: true },
   },
 
   plugins: [

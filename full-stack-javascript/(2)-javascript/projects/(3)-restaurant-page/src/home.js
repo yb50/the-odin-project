@@ -8,7 +8,7 @@ export function loadHome() {
   title.textContent = "Welcome to Dough n' Meat";
 
   const motto = document.createElement("p");
-  motto.textContent = "Traditional dishes made of dough and meat, locally sourced, served with a smile";
+  motto.textContent = "Traditional dishes made of dough and meat, locally sourced, served with a smile.";
 
   container.appendChild(title);
   container.appendChild(motto);

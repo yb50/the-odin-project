@@ -14,24 +14,35 @@ function setActiveButton(activeId) {
   buttonIds.forEach((id) => {
     const btn = document.getElementById(id);
     
-    if (!btn) {
-      return;
-    }
-
+    if (!btn) return;
     if (btn === activeId) {
       btn.classList.add("active");
+    } else {
+      btn.classList.remove("active");
     }
-  })
-
+  });
 }
 
+function showHome() {
+  clearContent();
+  setActiveButton("btn-home");
+  loadHome();
+}
 
+function showMenu() {
+  clearContent();
+  setActiveButton("btn-menu");
+  loadMenu();
+}
 
-console.log("Webpack is working ✅");
+function showContact() {
+  clearContent();
+  setActiveButton("btn-contact");
+  loadContact();
+}
 
-loadHome();
-loadMenu();
-loadContact();
+document.getElementById("btn-home").addEventListener("click", showHome);
+document.getElementById("btn-menu").addEventListener("click", showMenu);
+document.getElementById("btn-contact").addEventListener("click", showContact);
 
-
-loadPage();
+showHome();
