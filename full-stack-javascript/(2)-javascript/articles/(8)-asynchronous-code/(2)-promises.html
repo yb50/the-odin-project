@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Promise</title>
+</head>
+<body>
+  
+  <script>
+    // const getData = function() {
+    //   // go fetch data from some API...
+    //   // clean it up a bit and return it as an object:
+    //   return data
+    // }
+    
+    // We’re going to run into trouble because when we try to extract pieceOfData out of the returned data, the function getData() will most likely still be fetching, so myData will not be the expected data, but will be undefined. 
+
+    /*
+    const myData = getData()
+    const pieceOfData = myData['whatever']
+    */
+
+    // We need some way to solve this problem, and tell our code to wait until the data is done fetching to continue. Promises solve this issue. We’ll leave learning the specific syntax for the articles you’re about to read, but essentially Promises allow you to do this:
+
+    /*
+    const myData = getData() // if this is refactored to return a Promise...
+
+    myData.then(function(data) { // .then() tells it to wait until the promise is resolved
+      const pieceOfData = data['whatever'] // and THEN run the function inside
+    })
+    */
+    
+    // Example 1
+
+    // let p = new Promise((resolve, reject) => {
+    //   let a = 1 + 1;
+    //   if (a == 2) {
+    //     resolve('Success')
+    //   } else {
+    //     reject('failed')
+    //   }
+    // })
+    
+    // p.then((message) => {
+    //   console.log('This is in the then ' + message)
+    // }).catch((message) => {
+    //   console.log('This is in the catch ' + message)
+    // })
+
+    // Example 2
+
+    const userLeft = false;
+    const userWatchingCatMeme = true;
+
+    // ----- With Callback -----
+
+    // function watchTutorialCallback(callback, errorCallback) {
+    //   if (userLeft) {
+    //     errorCallback({
+    //       name: 'User Left',
+    //       message: ':('
+    //     })
+    //   } else if (userWatchingCatMeme) {
+    //     errorCallback({
+    //       name: 'User Watching Cat Meme',
+    //       message: 'miaow'
+    //     })
+    //   } else {
+    //     callback('Thumbs up and subscribe')
+    //   }
+    // }
+
+    // watchTutorialCallback((message) => {
+    //   console.log('Success: ' + message)
+    // }, (error) => {
+    //   console.log(error.name + ' ' + error.message)
+    // })
+
+    // ----- With Promise -----
+
+    function watchTutorialPromise() {
+      return new Promise((resolve, reject) => {
+        if (userLeft) {
+          reject({
+            name: 'User Left',
+            message: ':('
+          })
+        } else if (userWatchingCatMeme) {
+          reject({
+            name: 'User Watching Cat Meme',
+            message: 'MIAOW'
+          })
+        } else {
+          resolve('Thumbs up and subscribe')
+        }
+      })
+    }
+
+    watchTutorialPromise().then((message) => {
+        console.log('Success: ' + message)
+      }).catch((error) => {
+        console.log(error.name + ' ' + error.message)
+      })
+  </script>
+</body>
+</html>
+
+
+
