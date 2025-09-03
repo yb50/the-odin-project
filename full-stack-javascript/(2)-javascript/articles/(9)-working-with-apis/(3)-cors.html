@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      background-color: sandybrown;
+      font-family: Arial, sans-serif;
+    }
+
+    .search-box {
+      display: flex;
+      gap: 24px;
+      margin-top: 24px;
+      height: 24px;
+    }
+
+    input {
+      border-radius: 8px;
+      width: 300px;
+      border: 1px solid black;
+    }
+
+    button {
+      width: 120px;
+      border-radius: 8px;
+      border: 1px solid black;
+      color: white;
+      background-color: blueviolet;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: rgb(123, 28, 213);
+    }
+
+    button:active {
+      transform: translateY(1px);
+      opacity: 0.9; 
+    }
+
+    img {
+      width: 800px;
+      height: 640px;
+      background-color: blueviolet;
+      color: white;
+      font-size: x-large;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 8px;
+      border: 1px solid black;
+    }
+
+    #error {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="search-box">
+    <input type="text" placeholder="Search for something!">
+    <button>Search!</button>
+  </div>
+  
+  <img src="#" alt="Use the search box above to search for gifs!">
+  <p id="error"></p>
+
+  <script>
+    const search = document.querySelector("input")
+    const btn = document.querySelector("button");
+    const img = document.querySelector("img");
+    const errorMessage = document.getElementById("error");
+
+    btn.addEventListener("click", () => {
+      const query = search.value.trim();
+      if (!query) return;
+
+      fetch(`https://api.gphy.com/v1/gifs/translate?api_key=(my-own-api-key)&s=${encodeURIComponent(query)}`, {mode: 'cors'})
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(response) {
+          img.src = response.data.images.original.url;
+        })
+        .catch(() => {
+          img.style.display = "none";
+          errorMessage.textContent = "Error loading GIF. Please try again.";
+        });
+    })
+  </script>
+</body>
+</html>
