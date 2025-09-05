@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <script>
+    asyncFunctionCall().catch(err => {
+      console.error(err)
+    });
+
+    // Another way: inside the async function
+    async function getPersonsInfo(name) {
+      try {
+        const people = await server.getPeople();
+        const person = people.find(person => { return person.name === name });
+        return person;
+      } catch (error) {
+        // Handle the error any way you'd like
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <script>
+    const yourAsyncFunction = async () => {
+      // do something asynchronously and return a promise
+      return result;
+    }
+
+    anArray.forEach(async item => {
+      // do something asynchronously for each item in 'anArray'
+      // one could also use .map here to return an array of promises to use with 'Promise.all()'
+    });
+
+    server.getPeople().then(async people => {
+      people.forEach(person => {
+      // do something asynchronously for each person
+      });
+    });
+  </script>
+</body>
+</html>
