@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    #book-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .book-card {
+      display: flex;
+      flex-direction: column;
+      border: 1px solid black;
+      margin: 20px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+
+<body>
+  <button class="add-book-btn">Add book</button>
+
+  <div id="book-container"></div>
+
+  <dialog class="add-book-dialog">
+    <button class="close-btn">Close</button>
+
+    <div>
+      <label>
+        Title:
+        <input type="text" id="title">
+      </label>
+    </div>
+
+    <div>
+      <label>
+        Author:
+        <input type="text" id="author">
+      </label>
+    </div>
+
+    <div>
+      <label>
+        Pages:
+        <input type="text" id="pages">
+      </label>
+    </div>
+
+    <div>
+      <span>Read?</span>
+      <label>
+        <input type="radio" name="read" value="yes">
+        Yes
+      </label>
+      <label>
+        <input type="radio" name="read" value="no">
+        No
+      </label>
+    </div>
+
+    <button class="submit-button">Submit</button>
+  </dialog>
+
+  <script>
+    /*
+    // ----- Data and Constructor -----
+    const myLibrary = [];
+
+    function Book(title, author, pages, read) {
+      this.title = title;
+      this.author = author;
+      this.pages = pages;
+      this.read = read;
+      this.id = crypto.randomUUID();
+    }
+
+    // ----- Shared Methods (all Book instances use these) -----
+    Book.prototype.info = function () {
+      let readStatus = this.read ? "read already" : "not read yet";
+      return `${this.title} by ${this.author}, ${this.pages} pages, ${readStatus}`;
+    }
+
+    Book.prototype.toggleRead = function () {
+      this.read = !this.read;
+    }
+    */
+
+    // ----- Data and Class -----
+    const myLibrary = [];
+
+    class Book {
+      constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+        this.id = crypto.randomUUID();
+      }
+
+      // ----- Shared Methods (all Book instances use these) -----
+      info() {
+        let readStatus = this.read ? "read already" : "not read yet";
+        return `${this.title} by ${this.author}, ${this.pages} pages, ${readStatus}`;
+      }
+
+      toggleRead() { this.read = !this.read; }
+    }
+
+    // ----- Library Helpers -----
+    function addBookToLibrary(title, author, pages, read) {
+      const newBook = new Book(title, author, pages, read);
+      myLibrary.push(newBook);
+      return newBook;
+    }
+
+    function removeBookFromLibrary(id) {
+      const index = myLibrary.findIndex(book => book.id === id);
+      if (index !== -1) {
+        myLibrary.splice(index, 1);
+      }
+    }
+
+    // ----- Rendering -----
+    function displayBooks() {
+      const container = document.getElementById("book-container");
+      container.innerHTML = "";
+
+      for (const book of myLibrary) {
+        const card = document.createElement("div");
+        card.className = "book-card";
+
+        // Text Fields
+        const title = document.createElement("div");
+        title.textContent = `Title: ${book.title}`;
+
+        const author = document.createElement("div");
+        author.textContent = `Author: ${book.author}`;
+
+        const pages = document.createElement("div");
+        pages.textContent = `Pages: ${book.pages}`;
+
+        const readStatus = document.createElement("div");
+        readStatus.textContent = book.read ? "Read already" : "Not read yet";
+
+        // Buttons
+        const toggleBtn = document.createElement("button");
+        toggleBtn.textContent = "Toggle read status";
+        toggleBtn.addEventListener("click", () => {
+          book.toggleRead();
+          displayBooks();
+        });
+
+        const removeBtn = document.createElement("button");
+        removeBtn.textContent = "Remove"
+        removeBtn.addEventListener("click", () => {
+          removeBookFromLibrary(book.id);
+          displayBooks();
+        });
+
+        card.append(title, author, pages, readStatus, toggleBtn, removeBtn);
+        container.appendChild(card);
+      }
+    }
+
+    // ----- Dialog Form Logic -----
+    const dialog = document.querySelector(".add-book-dialog");
+    document.querySelector(".add-book-btn").onclick = () => dialog.showModal();
+    document.querySelector(".close-btn").onclick = () => dialog.close();
+
+    const submitBtn = document.querySelector(".submit-button");
+    submitBtn.addEventListener("click", (event) => {
+      event.preventDefault();
+
+      const title = document.getElementById("title").value;
+      const author = document.getElementById("author").value;
+      const pages = Number(document.getElementById("pages").value);
+      const readValue = document.querySelector("input[name='read']:checked")?.value;
+      const read = readValue === "yes";
+
+      addBookToLibrary(title, author, pages, read);
+      displayBooks();
+      dialog.close();
+    });
+
+    // ----- Seed Data -----
+    addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 295, false);
+    addBookToLibrary("Halo", "No Idea", 251, true);
+
+    displayBooks();
+  </script>
+</body>
+
+</html>
