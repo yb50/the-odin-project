@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <script>
+      function knightMoves(start, end) {
+
+        // ----- Validation -----
+
+        if (!isCoord(start) || !isCoord(end)) {
+          throw new Error("Inputs must be [x, y] with integers 0..7.");
+        }
+        if (!inBounds(start) || !inBounds(end)) {
+          throw new Error("Coordinates must be on the 8x8 board (0..7).");
+        }
+        if (start[0] === end[0] && start[1] === end[1]) return [start.slice()];
+
+        // ----- BFS setup -----
+        const deltas = [
+          [1, 2], [2, 1], [2, -1], [1, -2],
+          [-1, -2], [-2, -1], [-2, 1], [-1, 2],
+        ];
+        const key = (x, y) => `${x},${y}`;
+        const fromKey = (k) => k.split(",").map(Number);
+
+        const startKey = key(start[0], start[1]);
+        const endKey = key(end[0], end[1]);
+
+        const queue = [startKey];
+        const visited = new Set([startKey]);
+        const prev = new Map();
+
+        // ----- BFS -----
+        while (queue.length) {
+          const cur = queue.shift();
+          if (cur === endKey) break;
+
+          const [cx, cy] = fromKey(cur);
+          for (const [dx, dy] of deltas) {
+            const nx = cx + dx, ny = cy + dy;
+            if (!inBounds([nx, ny])) continue;
+            const nk = key(nx, ny);
+            if (visited.has(nk)) continue;
+
+            visited.add(nk);
+            prev.set(nk, cur);
+            queue.push(nk);
+          }
+        }
+
+        // ----- Reconstruct Path -----
+        if (!prev.has(endKey) && startKey !== endKey) {
+          return null;
+        }
+
+        const path = [];
+        let cur = endKey;
+        while (cur !== undefined) {
+          path.push(fromKey(cur));
+          cur = prev.get(cur);
+        }
+        path.reverse();
+        return path;
+
+        // ----- Helpers -----
+        function isCoord(c) {
+          return Array.isArray(c) &&
+            c.length === 2 &&
+            Number.isInteger(c[0]) &&
+            Number.isInteger(c[1]);
+        }
+        function inBounds([x, y]) {
+          return x >= 0 && x < 8 && y >= 0 && y < 8;
+        }
+      }
+
+      function reportKnightMoves(start, end) {
+        const path = knightMoves(start, end);
+        if (!path) {
+          console.log("No path found (shouldn't occur on 8x8).");
+          return;
+        }
+        const moves = Math.max(0, path.length - 1);
+        console.log(`You made it in ${moves} move${moves === 1 ? "" : "s"}! Here's your path:`);
+        path.forEach(p => console.log(`[${p[0]},${p[1]}]`));
+      }
+
+      // ----- Examples (deterministic shortest paths) -----
+      // Exact match:
+      console.log(knightMoves([0, 0], [1, 2]));
+
+      // One of multiple valid shortest paths:
+      console.log(knightMoves([0, 0], [3, 3]));
+      console.log(knightMoves([3, 3], [0, 0]));
+      console.log(knightMoves([0, 0], [7, 7]));
+
+      // Pretty print like the prompt:
+      reportKnightMoves([3, 3], [4, 3]);
+  </script>
+</body>
+</html>
