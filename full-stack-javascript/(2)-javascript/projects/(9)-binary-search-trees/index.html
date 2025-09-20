@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <script>
+    const prettyPrint = (node, prefix = '', isLeft = true) => {
+      if (node === null) return;
+      if (node.right !== null) {
+        prettyPrint(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false);
+      }
+      console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.data}`);
+      if (node.left !== null) {
+        prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true);
+      }
+    };
+
+    class Node {
+      constructor(data) {
+        this.data = data;
+        this.left = null;
+        this.right = null;
+      }
+    }
+
+    // ----- Tree Class -----
+    
+    class Tree {
+      constructor(array) {
+        this.root = this.buildTree(array);
+      }
+
+      buildTree(array) {
+        if (!Array.isArray(array)) {
+          throw new Error("buildTree expects an array");
+        }
+
+        const sorted = array
+          .slice()
+          .sort((a, b) => a - b);
+
+        const unique = [];
+        for (let i = 0; i < sorted.length; i++) {
+          if (i === 0 || sorted[i] !== sorted[i - 1]) {
+            unique.push(sorted[i]);
+          }
+        }
+
+        const buildBalanced = (arr, start, end) => {
+          if (start > end) return null;
+          const mid = Math.floor((start + end) / 2);
+          const node = new Node(arr[mid]);
+          node.left = buildBalanced(arr, start, mid - 1);
+          node.right = buildBalanced(arr, mid + 1, end);
+          return node;
+        };
+
+        return buildBalanced(unique, 0, unique.length - 1);
+      }
+
+      // ----- Insert -----
+
+      insert(value) {
+        if (value === undefined || value === null) {
+          throw new Error("insert(value) requires a value");
+        }
+
+        const insertNode = (node, value) => {
+          if (node === null) {
+            return new Node(value);
+          }
+          if (value === node.data) {
+            return node;
+          } else if (value < node.data) {
+            node.left = insertNode(node.left, value);
+          } else {
+            node.right = insertNode(node.right, value);
+          }
+          return node;
+        };
+
+        this.root = insertNode(this.root, value);
+      }
+
+      // ----- Delete -----
+
+      deleteItem(value) {
+        if (value === undefined || value === null) {
+          throw new Error("deleteItem(value) requires a value");
+        }
+
+        const deleteNode = (node, value) => {
+          if (node === null) return null;
+
+          if (value < node.data) {
+            node.left = deleteNode(node.left, value);
+            return node;
+          } else if (value > node.data) {
+            node.right = deleteNode(node.right, value);
+            return node;
+          } else {
+            if (node.left === null && node.right === null) {
+              return null;
+            }
+            
+            if (node.left === null) {
+              return node.right;
+            }
+            
+            if (node.right === null) {
+              return node.left;
+            }
+            
+            let successorParent = node;
+            let successor = node.right;
+            while (successor.left !== null) {
+              successorParent = successor;
+              successor = successor.left;
+            }
+            
+            node.data = successor.data;
+            
+            if (successorParent.left === successor) {
+              successorParent.left = deleteNode(successor, successor.data);
+            } else {
+              successorParent.right = deleteNode(successor, successor.data);
+            }
+            return node;
+          }
+        };
+
+        this.root = deleteNode(this.root, value);
+      }
+
+      // ----- Find -----
+      
+      find(value) {
+        if (value === undefined || value === null) {
+          throw new Error("find(value) requires a value");
+        }
+
+        let current = this.root;
+        while (current !== null) {
+          if (value === current.data) {
+            return current;
+          } else if (value < current.data) {
+            current = current.left;
+          } else {
+            current = current.right;
+          }
+        }
+        return null;
+      }
+
+      // ----- Traversals -----
+
+      // ----- Breadth First (BFS) -----
+      levelOrderForEach(callback) {
+        if (typeof callback !== "function") {
+          throw new Error("levelOrderForEach(callback) requires a callback function");
+        }
+
+        const queue = [];
+        if (this.root !== null) queue.push(this.root);
+
+        while (queue.length > 0) {
+          const node = queue.shift();
+          callback(node);
+          if (node.left !== null) queue.push(node.left);
+          if (node.right !== null) queue.push(node.right);
+        }
+      }
+
+      // ----- Depth First (DFS) -----
+
+      // In-order (Left, Root, Right)
+      inOrderForEach(callback) {
+        if (typeof callback !== "function") {
+          throw new Error("inOrderForEach(callback) requires a callback function");
+        }
+
+        const traverse = (node) => {
+          if (node === null) return;
+          traverse(node.left);
+          callback(node);
+          traverse(node.right);
+        };
+
+        traverse(this.root);
+      }
+
+      // Pre-order (Root, Left, Right)
+      preOrderForEach(callback) {
+        if (typeof callback !== "function") {
+          throw new Error("preOrderForEach(callback) requires a callback function");
+        }
+
+        const traverse = (node) => {
+          if (node === null) return;
+          callback(node);
+          traverse(node.left);
+          traverse(node.right);
+        };
+
+        traverse(this.root);
+      }
+
+      // Post-order (Left, Right, Root)
+      postOrderForEach(callback) {
+        if (typeof callback !== "function") {
+          throw new Error("postOrderForEach(callback) requires a callback function");
+        }
+
+        const traverse = (node) => {
+          if (node === null) return;
+          traverse(node.left);
+          traverse(node.right);
+          callback(node);
+        };
+
+        traverse(this.root);
+      }
+
+      // ----- Height and Depth -----
+      height(value) {
+        const node = this.find(value);
+        if (node === null) return null;
+
+        const heightOfNode = (n) => {
+          if (n === null) return -1;
+          const leftH = heightOfNode(n.left);
+          const rightH = heightOfNode(n.right);
+          return Math.max(leftH, rightH) + 1;
+        };
+
+        return heightOfNode(node);
+      }
+
+      depth(value) {
+        let depthCount = 0;
+        let current = this.root;
+
+        while (current !== null) {
+          if (value === current.data) {
+            return depthCount;
+          } else if (value < current.data) {
+            current = current.left;
+          } else {
+            current = current.right;
+          }
+          depthCount++;
+        }
+        return null;
+      }
+
+      // ----- Balance Check -----
+      isBalanced() {
+        const heightOfNode = (n) => {
+          if (n === null) return -1;
+          const leftH = heightOfNode(n.left);
+          const rightH = heightOfNode(n.right);
+          return Math.max(leftH, rightH) + 1;
+        };
+
+        const check = (n) => {
+          if (n === null) return true;
+
+          const leftH = heightOfNode(n.left);
+          const rightH = heightOfNode(n.right);
+          const diffOK = Math.abs(leftH - rightH) <= 1;
+
+          return diffOK && check(n.left) && check(n.right);
+        };
+
+        return check(this.root);
+      }
+
+      // ----- Rebalance -----
+      rebalance() {
+        const values = [];
+        this.inOrderForEach((node) => values.push(node.data));
+        this.root = this.buildTree(values);
+      }
+    }
+
+    // ----- Driver Script -----
+    (function driver() {
+      function randomArray(size) {
+        const arr = [];
+        for (let i = 0; i < size; i++) {
+          const n = Math.floor(Math.random() * 100);
+          arr.push(n);
+        }
+        return arr;
+      }
+
+      console.log("=== Building tree from random numbers < 100 ===");
+      const arr = randomArray(15);
+      console.log("Input array:", arr);
+
+      const tree = new Tree(arr);
+      console.log("\nPretty print of initial tree:");
+      prettyPrint(tree.root);
+
+      console.log("\nIs the tree balanced?", tree.isBalanced());
+
+      // ----- Printing Traversals -----
+      const levelList = [];
+      tree.levelOrderForEach((node) => levelList.push(node.data));
+      console.log("Level-order:", levelList);
+
+      const preList = [];
+      tree.preOrderForEach((node) => preList.push(node.data));
+      console.log("Pre-order:", preList);
+
+      const postList = [];
+      tree.postOrderForEach((node) => postList.push(node.data));
+      console.log("Post-order:", postList);
+
+      const inList = [];
+      tree.inOrderForEach((node) => inList.push(node.data));
+      console.log("In-order:", inList);
+
+      // ----- Unbalancing the tree by adding numbers > 100 -----
+      console.log("\n=== Unbalancing by inserting numbers > 100 ===");
+      const bigs = [101, 120, 130, 150, 160, 170];
+      for (let i = 0; i < bigs.length; i++) {
+        tree.insert(bigs[i]);
+      }
+      prettyPrint(tree.root);
+      console.log("Is the tree balanced now?", tree.isBalanced());
+
+      // ----- Rebalance -----
+      console.log("\n=== Rebalancing the tree ===");
+      tree.rebalance();
+      prettyPrint(tree.root);
+      console.log("Is the tree balanced now?", tree.isBalanced());
+
+      // ----- Printing Traversals Again -----
+      const levelList2 = [];
+      tree.levelOrderForEach((node) => levelList2.push(node.data));
+      console.log("Level-order (after rebalance):", levelList2);
+
+      const preList2 = [];
+      tree.preOrderForEach((node) => preList2.push(node.data));
+      console.log("Pre-order (after rebalance):", preList2);
+
+      const postList2 = [];
+      tree.postOrderForEach((node) => postList2.push(node.data));
+      console.log("Post-order (after rebalance):", postList2);
+
+      const inList2 = [];
+      tree.inOrderForEach((node) => inList2.push(node.data));
+      console.log("In-order (after rebalance):", inList2);
+
+      // ----- Demo: Find, Height, Depth, Delete -----
+      if (inList2.length > 0) {
+        const sample = inList2[Math.floor(inList2.length / 2)];
+        console.log(`\nFind ${sample}:`, tree.find(sample));
+        console.log(`Height(${sample}):`, tree.height(sample));
+        console.log(`Depth(${sample}):`, tree.depth(sample));
+      }
+
+      // ----- Try Delete -----
+      console.log("\n=== Delete demo ===");
+      console.log("Deleting 120 (if present)...");
+      tree.deleteItem(120);
+      prettyPrint(tree.root);
+    })();
+  </script>
+</body>
+</html>
