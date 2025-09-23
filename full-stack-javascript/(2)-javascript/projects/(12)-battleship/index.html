@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Battleship</title>
+  <style>
+    body {
+      font-family: sans-serif;
+    }
+
+    .row {
+      display: flex;
+    }
+
+    .cell {
+      width: 28px;
+      height: 28px;
+      margin: 2px;
+      font-size: 14px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .boards {
+      display: flex;
+      gap: 16px;
+      margin-top: 12px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Battleship</h1>
+  <div style="margin-bottom:8px;">
+    <button id="randomize">Randomize My Fleet</button>
+    <span id="status">Your move.</span>
+  </div>
+  <div class="boards">
+    <div>
+      <h2>Your Board</h2>
+      <div id="player-board"></div>
+    </div>
+    <div>
+      <h2>Enemy Board</h2>
+      <div id="enemy-board"></div>
+    </div>
+  </div>
+
+  <script type="module" src="./src/index.js"></script>
+</body>
+
+</html>

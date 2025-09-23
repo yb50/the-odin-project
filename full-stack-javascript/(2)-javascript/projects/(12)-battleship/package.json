@@ -1,0 +1,17 @@
+{
+  "name": "battleship-tdd",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "test": "jest --watchAll",
+    "test:once": "jest",
+    "start": "http-server ."
+  },
+  "devDependencies": {
+    "@babel/core": "^7.25.0",
+    "@babel/preset-env": "^7.25.0",
+    "babel-jest": "^29.7.0",
+    "http-server": "^14.1.1",
+    "jest": "^29.7.0"
+  }
+}
