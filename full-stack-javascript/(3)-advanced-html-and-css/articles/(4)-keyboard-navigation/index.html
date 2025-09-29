@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- The `tabindex` attribute makes the `<div>` elements focusable. -->
+  <div class='button-container'>
+    <button class='rock button' tabindex='0'>Rock</button>
+    <button class='paper button' tabindex='0'>Paper</button>
+    <button class='scissors button' tabindex='0'>Scissors</button>
+  </div>
+
+  <script>
+    const buttons = document.querySelectorAll('.button');
+
+    function nameAlerter(e) {
+      if (e.type === 'click' || e.key === ' ' || e.key === 'Enter') {
+        alert(e.target.textContent);
+      }
+    }
+
+    buttons.forEach(button => {
+      button.addEventListener('click', nameAlerter)
+      button.addEventListener('keydown', nameAlerter)
+    })
+  </script>
+</body>
+</html>
