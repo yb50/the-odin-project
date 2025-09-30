@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- ----- aria-label ----- -->
+
+  <button type='button' aria-label='Close menu'>X</button>
+
+  <nav aria-label='main navigation'>...</nav>
+
+  <!-- ----- aria-labelledby ----- -->
+
+  <!-- Here's the labeling element -->
+  <h2 id='label'>Shirts</h2>
+  
+  <!-- And here's the labeled element. Note the order of the ID references passed in -->
+  <button type='button' id='shop-btn' aria-labelledby='label shop-btn'>Shop Now</button>
+
+  <!-- Clicking the <label> element gives focus to the input element -->
+  <label for='name'>Name:</label>
+  <input id='name' type='text' />
+  
+  <!-- Clicking the <div> element won't give focus to the input element -->
+  <div id='label'>Name:</div>
+  <input type='text' aria-labelledby='label' />
+
+  <!-- ----- aria-describedby ----- -->
+  
+  <label>Password:
+    <input type='password' aria-describedby='password-requirements' />
+  </label>
+  
+  <!-- Meaningful text + ARIA! -->
+  <span id='password-requirements'>Password must be at least 10 characters long.</span>
+
+  <!-- ----- Hiding Content From The Accessibility Tree ----- -->
+  
+  <!-- Example 1: “Add add book, button” -->
+  <button type='button'>
+    <span class='material-icons'>add</span>
+    Add Book
+  </button>
+  
+  <!-- Example 2: “Add book, button” -->
+  <button type='button'>
+    <span class='material-icons' aria-hidden='true'>add</span>
+    Add Book
+  </button>
+
+</body>
+</html>
